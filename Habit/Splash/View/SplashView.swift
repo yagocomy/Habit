@@ -8,11 +8,47 @@
 import SwiftUI
 
 struct SplashView: View {
+    
+    @State var state: SplashUIState = .loading
+    @State var showAlert = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        switch state {
+        case .loading:
+            loadingView()
+        case .goToSignInScreen:
+            Text("Carregar tela de login")
+        case .goToHomeScreen:
+            Text("Carregar tela Principal")
+        case .error(let msg):
+            Text("Mostrar erro: \(msg)")
+            loadingView(error: msg)
+        }
+    }
+}
+
+extension SplashView {
+    
+    func loadingView(error: String? = nil ) -> some View {
+        ZStack {
+            Image("logo")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(20)
+                .background(Color.white)
+                .ignoresSafeArea()
+            
+            if let error = error {
+                Text("")
+                    .alert(isPresented: .constant(true)) {
+                        Alert(title: Text("Habit"), message: Text(error), dismissButton: .default(Text("OK")))
+                    }
+            }
+        }
     }
 }
 
 #Preview {
-    SplashView()
+    SplashView(state: .error("Teste de erro no servidor"))
 }
