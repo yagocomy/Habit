@@ -7,12 +7,10 @@
 
 import SwiftUI
 
-struct SplashViewRouter: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    SplashViewRouter()
+enum SplashViewRouter {
+  
+  static func makeSignInView() -> some View {
+    let viewModel = SignInViewModel()
+    return SignInView(viewModel: viewModel)
+  }
 }
