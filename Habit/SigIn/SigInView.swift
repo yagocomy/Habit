@@ -17,20 +17,30 @@ struct SignInView: View {
     @State var action: Int? = 0
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .center) {
-                Image("logo")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.horizontal, 48)
-                Text("Login")
-                    .foregroundColor(.orange)
-                    .font(Font.system(.title).bold())
-                    .padding(.bottom, 8)
-                numberField
-                passwordField
-                enterButton
-                registerLink
+        ScrollView(showsIndicators: false) {
+            NavigationView {
+                VStack(alignment: .center, spacing: 20) {
+                    
+                    Spacer(minLength: 36)
+                    
+                    VStack(alignment: .center, spacing: 8) {
+                        Image("logo")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.horizontal, 48)
+                        Text("Login")
+                            .foregroundColor(.orange)
+                            .font(Font.system(.title).bold())
+                            .padding(.bottom, 8)
+                        numberField
+                        passwordField
+                        enterButton
+                        registerLink
+                    }
+                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.horizontal, 32)
+                    .background(Color.white)
+                    .navigationBarTitle("Login", displayMode: .inline)
             }
         }
     }
